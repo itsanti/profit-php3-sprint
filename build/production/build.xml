@@ -6,13 +6,13 @@
         <php returnProperty="build.time" function="date">
             <param value="Y-m-d-H-i-s" />
         </php>
-        <property name="config.site" value="test.com" />
+        <property name="config.site_domain" value="test.com" />
         <property name="current.dir" value="/vagrant/current" />
         <resolvepath  propertyName="target.dir" file="/vagrant/${build.time}" />
         <echo msg="Source dir: ${project.basedir}" />
         <echo msg="Target dir: ${target.dir}" />
         <echo msg="Current dir: ${current.dir}" />
-        <echo msg="config.site: ${config.site}" />
+        <echo msg="config.site_domain: ${config.site_domain}" />
         <echo msg="build.time: ${build.time}" />
     </target>
 
@@ -32,7 +32,7 @@
         <copy file="${project.basedir}/protected/config.php" tofile="${target.dir}/protected/config.php">
         <filterchain>
             <replacetokens begintoken="{{" endtoken="}}">
-                <token key="domain" value="${config.site}" />
+                <token key="domain" value="${config.site_domain}" />
             </replacetokens>
         </filterchain>
         </copy>
@@ -45,12 +45,7 @@
     <target name="symlink">
         <symlink target="${target.dir}" link="${current.dir}" overwrite="true" />
     </target>
-    
-    <target name="test">
-        <echo msg="it works" />
-    </target>
 
     <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink"></target>
 
-<!-- <target name="build" depends="vars"></target> -->
 </project>
