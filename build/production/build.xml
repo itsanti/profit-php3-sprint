@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="profit-learn" default="build" basedir=".">
+
+    <target name="vars">
+        <php returnProperty="build.time" function="date">
+            <param value="Y-m-d-H-i-s" />
+        </php>
+        <property name="config.site" value="test.com" />
+        <property name="current.dir" value="/vagrant/current" />
+        <resolvepath  propertyName="target.dir" file="/vagrant/${build.time}" />
+        <echo msg="Source dir: ${project.basedir}" />
+        <echo msg="Target dir: ${target.dir}" />
+        <echo msg="Current dir: ${current.dir}" />
+        <echo msg="config.site: ${config.site}" />
+        <echo msg="build.time: ${build.time}" />
+    </target>
+
+    <target name="copy-proj">
+        <copy todir="${target.dir}">
+            <fileset dir="${project.basedir}" defaultexcludes="true">
+                <include name="**"/>
+                <exclude name="build/" />
+                <exclude name="protected/config.php" />
+                <exclude name="init.sh" />
+                <exclude name="phing.phar" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="copy-conf">
+        <copy file="${project.basedir}/protected/config.php" tofile="${target.dir}/protected/config.php">
+        <filterchain>
+            <replacetokens begintoken="{{" endtoken="}}">
+                <token key="domain" value="${config.site}" />
+            </replacetokens>
+        </filterchain>
+        </copy>
+    </target>
+
+    <target name="composer">
+        <exec dir="${target.dir}" command="php ${target.dir}/composer.phar install" checkreturn="true" passthru="true" />
+    </target>
+    
+    <target name="symlink">
+        <symlink target="${target.dir}" link="${current.dir}" overwrite="true" />
+    </target>
+    
+    <target name="test">
+        <echo msg="it works" />
+    </target>
+
+    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink"></target>
+
+<!-- <target name="build" depends="vars"></target> -->
+</project>
