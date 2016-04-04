@@ -3,17 +3,11 @@
 <project name="profit-learn" default="build" basedir=".">
 
     <target name="vars">
-        <php returnProperty="build.time" function="date">
-            <param value="Y-m-d-H-i-s" />
-        </php>
         <property name="config.site.domain" value="test.com" />
-        <property name="current.dir" value="/vagrant/current" />
-        <resolvepath  propertyName="target.dir" file="/vagrant/${build.time}" />
+        <property name="target.dir" value="/vagrant/current" />
         <echo msg="Source dir: ${project.basedir}" />
         <echo msg="Target dir: ${target.dir}" />
-        <echo msg="Current dir: ${current.dir}" />
         <echo msg="config.site.domain: ${config.site.domain}" />
-        <echo msg="build.time: ${build.time}" />
     </target>
 
     <target name="copy-proj">
@@ -41,11 +35,7 @@
     <target name="composer">
         <exec dir="${target.dir}" command="php ${target.dir}/composer.phar install" checkreturn="true" passthru="true" />
     </target>
-    
-    <target name="symlink">
-        <symlink target="${target.dir}" link="${current.dir}" overwrite="true" />
-    </target>
 
-    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink"></target>
+    <target name="build" depends="vars, copy-proj, copy-conf, composer"></target>
 
 </project>

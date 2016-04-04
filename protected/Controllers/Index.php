@@ -10,7 +10,7 @@ class Index
 
     public function actionDefault()
     {
-      $this->data->site = $this->app->config['SITE_DOMAIN'];
+      $this->data->domain = $this->app->config->site['domain'];
     }
 
 }

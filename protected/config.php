@@ -1,3 +1,7 @@
 <?php
 
-return ['SITE_DOMAIN' => "{{domain}}"];
+return [
+  'site' => [
+    'domain' => '{{domain}}'
+  ]
+];
