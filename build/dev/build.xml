@@ -15,7 +15,6 @@
             <fileset dir="${project.basedir}" defaultexcludes="true">
                 <include name="**"/>
                 <exclude name="build/" />
-                <exclude name="protected/config.php" />
                 <exclude name="init.sh" />
                 <exclude name="phing.phar" />
             </fileset>
@@ -23,19 +22,26 @@
     </target>
     
     <target name="copy-conf">
-        <copy file="${project.basedir}/protected/config.php" tofile="${target.dir}/protected/config.php">
+        <copy file="${project.basedir}/build/production/config.php" tofile="${target.dir}/protected/config.php">
         <filterchain>
             <replacetokens begintoken="{{" endtoken="}}">
                 <token key="domain" value="${config.site.domain}" />
+                <token key="db.password" value="${db.password}" />
             </replacetokens>
         </filterchain>
         </copy>
     </target>
 
     <target name="composer">
-        <exec dir="${target.dir}" command="php ${target.dir}/composer.phar install" checkreturn="true" passthru="true" />
+        <exec dir="${target.dir}" command="php ${target.dir}/composer.phar install"
+        checkreturn="true" passthru="true" error="stdout" />
+    </target>
+    
+    <target name="migrate">
+        <exec dir="${target.dir}" command="php ${target.dir}/protected/t4.php /migrate/up"
+        checkreturn="true" passthru="true" error="stdout" />
     </target>
 
-    <target name="build" depends="vars, copy-proj, copy-conf, composer"></target>
+    <target name="build" depends="vars, copy-proj, copy-conf, composer, migrate"></target>
 
 </project>

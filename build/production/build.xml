@@ -46,7 +46,12 @@
     <target name="symlink">
         <symlink target="${target.dir}" link="${current.dir}" overwrite="true" />
     </target>
+    
+    <target name="migrate">
+        <exec dir="${target.dir}" command="php ${target.dir}/protected/t4.php /migrate/up"
+        checkreturn="true" passthru="true" error="stdout" />
+    </target>
 
-    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink"></target>
+    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink, migrate"></target>
 
 </project>
