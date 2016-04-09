@@ -51,7 +51,12 @@
         <exec dir="${target.dir}" command="php ${target.dir}/protected/t4.php /migrate/up"
         checkreturn="true" passthru="true" error="stdout" />
     </target>
-
-    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink, migrate"></target>
+    
+    <target name="unit-test">
+        <exec dir="${target.dir}" command="${target.dir}/vendor/bin/phpunit ${target.dir}/tests/"
+              checkreturn="true" passthru="true" error="stdout" />
+    </target>
+    
+    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink, migrate, unit-test"></target>
 
 </project>

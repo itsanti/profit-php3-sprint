@@ -12,3 +12,17 @@
 с последующим восстановлением его в `down()`
 * монжно просто выкидывать исключение
 * [SO на тему](http://stackoverflow.com/questions/621257/rails-is-it-bad-to-have-an-irreversible-migration)
+
+### Д3 №3
+1-4: коммит "added unit tests"
+
+Unit test log:
+```
+PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
+
+ .........                                                           9 / 9 (100%)
+
+ Time: 183 ms, Memory: 3.75Mb
+
+ OK (9 tests, 9 assertions)
+```

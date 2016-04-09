@@ -11,15 +11,18 @@ class m_1459971261_addUsers
     public function up()
     {
         $this->createTable('users', [
-            'login' => ['type' => 'string'],
+            'email' => ['type' => 'string'],
             'password' => ['type' => 'string'],
+            'surname' => ['type' => 'string'],
             'name' => ['type' => 'string'],
+            'patronymic' => ['type' => 'string'],
             'created' => ['type' => 'int', 'default' => 0],
         ]);
 
         $this->insert('users', [
-            'login' => 'admin',
+            'email' => 'admin@dev.com',
             'password' => '202cb962ac59075b964b07152d234b70',
+            'surname' => 'Kurov',
             'name' => 'Aleksandr',
             'created' => $this->getTimestamp(),
         ]);
