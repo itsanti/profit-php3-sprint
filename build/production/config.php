@@ -13,5 +13,10 @@ return [
       'password' => '{{db.password}}',
       'dbname' => 'fw'
     ]
-  ]
+  ],
+  
+  'mail' => [
+    'method' => 'php'
+  ],
+  
 ];

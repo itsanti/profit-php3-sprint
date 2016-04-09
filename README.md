@@ -16,6 +16,8 @@
 ### Д3 №3
 1-4: коммит "added unit tests"
 
+5-6: коммит "added command and crontab"
+
 Unit test log:
 ```
 PHPUnit 5.3.1 by Sebastian Bergmann and contributors.

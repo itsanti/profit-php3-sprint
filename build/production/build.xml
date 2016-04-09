@@ -57,6 +57,12 @@
               checkreturn="true" passthru="true" error="stdout" />
     </target>
     
-    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink, migrate, unit-test"></target>
+    <target name="crontab">
+        <copy file="${project.basedir}/build/production/app-crontab" tofile="${target.dir}/app-crontab" overwrite="true" />
+        <exec dir="${target.dir}" command="crontab ${target.dir}/app-crontab"
+              checkreturn="true" passthru="true" error="stdout" />
+    </target>
+    
+    <target name="build" depends="vars, copy-proj, copy-conf, composer, symlink, migrate, unit-test, crontab"></target>
 
 </project>
