@@ -28,3 +28,10 @@ PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
 
  OK (9 tests, 9 assertions)
 ```
+
+### Д3 №4
+1-2: файл `/tests/intsize.php`
+
+3: файл `/tests/objectchains.txt`
+
+4: файл `/tests/memleaks.php`

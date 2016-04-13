@@ -1,0 +1,5 @@
+Поиск по шаблону ~\$\w+(->\w+){4,}~ в каталоге с проектом фреймворка дал следующие результаты:
+1. return $this->app->db->default->query($query)->fetchScalar() ?: 0;
+2. $this->app->db->default->execute($query);
+3. if ($this->app->db->default->getDriverName() == 'mysql') {
+4. $this->app->db->default->execute($query);
