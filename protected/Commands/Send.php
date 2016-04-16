@@ -4,8 +4,7 @@ namespace App\Commands;
 
 use T4\Mvc\Application;
 use T4\Console\Command;
-use T4\Mail\Sender;
-
+use App\Models\SenderValid;
 
 class Send
 	extends Command
@@ -25,12 +24,18 @@ class Send
 		$subject = 'Total users on ' . date('Y/m/d/ - H:i');
 		$message = 'Hi! Now you have ' . $count . ' users.';
 
-		$sender = new Sender();
+		$sender = new SenderValid();
+
+		if(!$sender->isValid($to)) {
+			$this->writeLn("[send/userscount]: email address is considered invalid");
+			exit(1);
+		}
+
 		$result = $sender->sendMail($to, $subject, $message);
 		if ($result) {
-			echo "[send/userscount]: email was sent successfully\n";
+			$this->writeLn("[send/userscount]: email was sent successfully");
 		} else {
-			echo "[send/userscount]: error: email wasn't sent\n";
+			$this->writeLn("[send/userscount]: error: email wasn't sent");
 		}
 	}
 }

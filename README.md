@@ -35,3 +35,6 @@ PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
 3: файл `/tests/objectchains.txt`
 
 4: файл `/tests/memleaks.php`
+
+### Д3 №5
+1: коммит "added protected method test"
