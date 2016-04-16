@@ -10,6 +10,7 @@ use App\Models\User;
 class UserMock
 {
 	const USER_EMAIL = 'test@dev.com';
+	const TPL = 'Lerdorf/Rasmus <'.UserMock::USER_EMAIL.'>';
 
 	public function __construct($name, $patronymic, $surname)
 	{
@@ -42,9 +43,9 @@ class UserTest
 			[UserMock::USER_EMAIL, [null, 'PHP', null]],
 			[UserMock::USER_EMAIL, [null, 'PHP', 'Lerdorf']],
 			[UserMock::USER_EMAIL, ['Rasmus', null, null]],
-			['Rasmus Lerdorf',     ['Rasmus', null, 'Lerdorf']],
+	        [UserMock::TPL,        ['Rasmus', null, 'Lerdorf']],
 			[UserMock::USER_EMAIL, ['Rasmus', 'PHP', null]],
-			['Rasmus PHP Lerdorf', ['Rasmus', 'PHP', 'Lerdorf']],
+			[UserMock::TPL,        ['Rasmus', 'PHP', 'Lerdorf']],
 		];
 	}
 }

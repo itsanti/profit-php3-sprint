@@ -38,3 +38,10 @@ PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
 
 ### Д3 №5
 1: коммит "added protected method test"
+
+2: коммит "refactored User::getUserFullName method"
+
+3: практическое применение Reflection API:
+* визуализация дерева наследования для класса
+* реализация аналога phpDocumentor
+* автоматическая подгрузка зависимостей в классы
