@@ -45,3 +45,6 @@ PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
 * визуализация дерева наследования для класса
 * реализация аналога phpDocumentor
 * автоматическая подгрузка зависимостей в классы
+
+### Д3 №6
+1-2: коммит "added umail microservice"

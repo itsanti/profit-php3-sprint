@@ -38,4 +38,41 @@ class Send
 			$this->writeLn("[send/userscount]: error: email wasn't sent");
 		}
 	}
+
+	public function actionUmailSend(){
+
+		\T4\Mvc\Application
+			::getInstance()
+			->setConfig(
+				new \T4\Core\Config(ROOT_PATH_PROTECTED . '/config.php')
+			);
+
+		$conn = $this->app->db->default;
+
+		$tasks = $conn->query('SELECT * FROM umail WHERE status = 0')->fetchAll(\PDO::FETCH_ASSOC);
+
+		foreach ( $tasks as $task ) {
+			$user = $conn->query('SELECT * FROM users WHERE __id = :id', [':id' => $task['to']])->fetch(\PDO::FETCH_ASSOC);
+
+			if (!empty($user)) {
+
+				$params = unserialize($task['params']);
+
+				$sender = new SenderValid();
+
+				$result = $sender->sendMail($user['email'], $params->subject, $params->message);
+
+				if ($result) {
+					$conn->execute('UPDATE umail set status = 1 WHERE __id = :id', [':id' => $task['__id']]);
+					$this->writeLn("[send/umailsend]: email was sent successfully");
+				} else {
+					$this->writeLn("[send/umailsend]: error: email wasn't sent");
+				}
+
+			} else {
+				$conn->execute('UPDATE umail set status = -1 WHERE __id = :id', [':id' => $task['__id']]);
+				$this->writeLn("[send/umailsend]: error: user does not exists");
+			}
+		}
+	}
 }
