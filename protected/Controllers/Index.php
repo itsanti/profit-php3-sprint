@@ -35,6 +35,8 @@ class Index
     
     public function actionUmail($id = 0)
     {
+        $id = (int) $id;
+        
         if($id == 0) {
           $this->data->response = 'need user id for operation!';
           $this->data->qid = -1;
@@ -42,7 +44,7 @@ class Index
         }
         
         $query = [
-            "id" => $this->app->request->get['id'],
+            "id" => $id,
             "template" => "standard",
             "params" => [
                 "subject" => "hello, world",
@@ -59,20 +61,21 @@ class Index
     
     public function actionStatus($qid = 0)
     {
-        if($qid == -1) {
-          $this->data->qid = -1;
+        $qid = (int) $qid;
+        
+        if($qid == -1 || $qid == 0) {
+          $this->data->qid = $qid;
           $this->data->status = 'task does not exists';
           return;
         }
         
         $query = [
-            "qid" => $this->app->request->get['qid'],
+            "qid" => $qid,
         ];
 
         $response = $this->sendQuery($query, 'http://umail.loc/status');
         $data = json_decode($response);
-        $this->data->qid = $data->qid;
+        $this->data->qid = $qid;
         $this->data->status = $data->task;
     }
-
 }

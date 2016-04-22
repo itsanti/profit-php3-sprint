@@ -47,4 +47,6 @@ PHPUnit 5.3.1 by Sebastian Bergmann and contributors.
 * автоматическая подгрузка зависимостей в классы
 
 ### Д3 №6
-1-2: коммит "added umail microservice in umail branch"
+1-2: коммиты
+* added umail microservice in umail branch
+* added templates for umail
