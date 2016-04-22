@@ -21,4 +21,5 @@
 # 
 # m h  dom mon dow   command
 0 */6 * * * php /vagrant/current/protected/t4.php send/userscount --to=test@dev.ru >> /vagrant/cron.log 2>&1
+*/5 * * * * php /vagrant/umail/umail_cli.php >> /vagrant/cron.log 2>&1
 
